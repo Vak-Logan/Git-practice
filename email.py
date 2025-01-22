@@ -74,38 +74,42 @@ populate_inbox()
 # Main program loop
 menu = True
 while True:
-    user_choice = int(input('''\nWould you like to:
-    1. Read an email
-    2. View unread emails
-    3. Quit application
-
-    Enter selection: '''))
-       
-    if user_choice == 1:
-        print("\nYour inbox: ")
-        list_emails()
-        
-        email_index = int(input(
-            "\nPlease input which email number you would like to read: "
-        ))
-        read_email(email_index)
-
-    elif user_choice == 2:
-        print("\nYour unread emails:")
-
-        unread_email_exists = False
-
-        for i,email in enumerate(inbox):
-            if email.has_been_read == False:
-                print(f"{i}   {email.subject_line}")
-                unread_email_exists = True
-        
-        if unread_email_exists == False:
-            print("\n NONE")
+    try:
+        user_choice = int(input('''\nWould you like to:
+        1. Read an email
+        2. View unread emails
+        3. Quit application
+    
+        Enter selection: '''))
+           
+        if user_choice == 1:
+            print("\nYour inbox: ")
+            list_emails()
             
-    elif user_choice == 3:
-        print("\nYou have chosen to exit. Goodbye.")
-        break
-
-    else:
-        print("Oops - incorrect input.")
+            email_index = int(input(
+                "\nPlease input which email number you would like to read: "
+            ))
+            read_email(email_index)
+    
+        elif user_choice == 2:
+            print("\nYour unread emails:")
+    
+            unread_email_exists = False
+    
+            for i,email in enumerate(inbox):
+                if email.has_been_read == False:
+                    print(f"{i}   {email.subject_line}")
+                    unread_email_exists = True
+            
+            if unread_email_exists == False:
+                print("\n NONE")
+                
+        elif user_choice == 3:
+            print("\nYou have chosen to exit. Goodbye.")
+            break
+    
+        else:
+            print("Oops - incorrect input.")
+    except ValueError:
+        print("Invalid input. Please enter a numeric value.")
+        
